@@ -1,2 +1,2 @@
-import Form from "./js/components/Form";
+import "./js";
 import './styles/style.css';
