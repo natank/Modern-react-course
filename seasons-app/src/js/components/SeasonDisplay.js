@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SeasonDisplay = () => {
+const SeasonDisplay = (props) => {
   return pug`
    div Season Display
   `

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import SeasonDisplay from './components/SeasonDisplay';
 class App extends React.Component {
   state = { lat: null, errorMessage: '' };
 
@@ -11,15 +11,15 @@ class App extends React.Component {
     );
   }
   render() {
-    console.log(this.state)
     if (this.state.errorMessage && !this.state.lat) {
       return pug`
         div Error: ${this.state.errorMessage}
       `
     }
     if (!this.state.errorMessage && this.state.lat) {
+      console.log(`state: ${JSON.stringify(this.state)}`)
       return pug`
-          div Latitude: ${this.state.lat}
+         SeasonDisplay(lat= ${this.state.lat})
         `
     }
     return pug`
