@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './components/SeasonDisplay';
+import Spinner from './components/Spinner';
+
 class App extends React.Component {
   state = { lat: null, errorMessage: '' };
 
@@ -10,7 +12,8 @@ class App extends React.Component {
       err => this.setState({ errorMessage: err.message })
     );
   }
-  render() {
+
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return pug`
         div Error: ${this.state.errorMessage}
@@ -23,7 +26,14 @@ class App extends React.Component {
         `
     }
     return pug`
-      div Loading!
+      Spinner()
+    `    
+  }
+
+  render() {
+    return pug`
+      div.border.red
+        ${this.renderContent()}
     `
   }
 }
