@@ -10,8 +10,9 @@ class App extends Component {
 
   render() {
     return pug`
+    .ui.container  
       div
-        SearchBar
+          SearchBar
     `
   }
 }
