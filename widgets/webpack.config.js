@@ -30,6 +30,7 @@ module.exports = {
     hot: true,
     port: 3000
   },
+  devtool: 'eval-source-map',
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/index.html",
