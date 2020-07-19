@@ -1,6 +1,9 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
 module.exports = {
+  output: {
+    publicPath: '/'
+  },
   module: {
     rules: [
       {
@@ -24,11 +27,13 @@ module.exports = {
       }
     ]
   },
+  
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     hot: true,
-    port: 3000
+    port: 3000,
+    historyApiFallback: true
   },
   devtool: 'eval-source-map',
   plugins: [
