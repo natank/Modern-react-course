@@ -26,7 +26,6 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
         | ${option.label}
     `
   })
-  console.log(`ref.current = ${ref.current}`)
   return (pug`
     .ui.form(ref=${ref})
       .field

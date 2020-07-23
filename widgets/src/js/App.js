@@ -1,51 +1,62 @@
 import React, { useState } from "react";
 import Accordion from './components/Accordion'
 import Search from './components/Search';
-// import Translate from './components/Translate';
+import Translate from './components/Translate';
+import Dropdown from './components/Dropdown';
+import Route from './components/Route';
+import Header from './components/Header';
 
 const items = [
   {
-    title: 'hello',
-    content: 'nice day'
+    title: 'What is React?',
+    content: 'React is a front end javascript framework',
   },
   {
-    title: 'goodby',
-    content: 'see you soon'
-  }
-]
-const showAccordion = () => {
-  if (window.location.pathname === '/') {
-    return pug`
-      Accordion(items= ${items})
-    `
-  }
-}
+    title: 'Why use React?',
+    content: 'React is a favorite JS library among engineers',
+  },
+  {
+    title: 'How do you use React?',
+    content: 'You use React by creating components',
+  },
+];
 
-const showList = () => {
-  if(window.location.pathname === '/list') {
-    return pug`
-      Search
-    `
-  }
-}
-
-const showDropdown = () => {
-  if(window.location.pathname === '/dropdown') {
-    return pug`
-      Dropdown
-    `
-  }
-}
+const options = [
+  {
+    label: 'The Color Red',
+    value: 'red',
+  },
+  {
+    label: 'The Color Green',
+    value: 'green',
+  },
+  {
+    label: 'A Shade of Blue',
+    value: 'blue',
+  },
+];
 
 
 
 export default () => {
-
+  const [selected, setSelected] = useState(options[0])
   return (
     pug`
-      ${showAccordion()}
-      ${showList()}
-      ${showDropdown()}
+      div
+        Header
+        Route(path="/")
+          Accordion(items=${items})
+        Route(path="/list")
+          Search
+        Route(path="/dropdown")
+          Dropdown(
+            label="Select a color"
+            options=${options}
+            selected = ${selected}
+            onSelectedChange=${setSelected}
+          )
+        Route(path="/translate")
+          Translate
     `
   )
 

@@ -22,6 +22,7 @@ const Accordion = ({ items }) => {
           p ${item.content}
     `
   })
+
   return pug`
     .ui.styled.accordion
       ${renderedItems}
