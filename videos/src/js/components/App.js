@@ -1,22 +1,22 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import SearchBar from './SearchBar'
 import youtube from '../apis/youtube';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
+
 const KEY = 'AIzaSyDtGVSk0ETLO7HdxYwFker-92V_oTIh7J0';
 
-class App extends Component {
-  state = { videos: [], selectedVideo: null };
-  constructor() {
-    super();
+function App() {
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
-  }
+  useEffect(() => {
+    onTermSubmit("chocolate")
+  }, []);
 
-  componentDidMount() {
-    this.onTermSubmit("chocolate")
-  }
-  onTermSubmit = async term => {
+  async function onTermSubmit(term) {
+
     try {
       let response = await youtube.get("/search", {
         params: {
@@ -26,31 +26,33 @@ class App extends Component {
           key: KEY
         }
       });
-      this.setState({
-        videos: response.data.items,
-        selectedVideo: response.data.items[0]
-      });
+
+      setVideos(response.data.items);
+      setSelectedVideo(response.data.items[0]);
+
     } catch (err) {
       console.log(err);
     }
+
   }
 
-  onVideoSelect = video => {
-    this.setState({ selectedVideo: video })
+  function onVideoSelect(video) {
+    return () => {
+      setSelectedVideo(video)
+    }
   }
-  render() {
-    return pug`
+
+  return pug`
     .ui.container  
       div
-          SearchBar(onFormSubmit=this.onTermSubmit)
+          SearchBar(onFormSubmit= onTermSubmit)
           .ui.grid
             .ui.row
               .eleven.wide.column
-                VideoDetail(video= this.state.selectedVideo)
+                VideoDetail(video= ${selectedVideo})
               .five.wide.column
-                VideoList(onVideoSelect = this.onVideoSelect videos = this.state.videos)
+                VideoList(onVideoSelect = ${onVideoSelect} videos = ${videos})
     `
-  }
 }
 
 export default App;
