@@ -7,6 +7,6 @@ import App from './components/App';
 import reducers from './reducers';
 
 ReactDOM.render(pug`
-  ${Provider}(store = ${createStore(reducers)})
+  Provider(store = ${createStore(reducers)})
     App
 `, document.querySelector('#root'))

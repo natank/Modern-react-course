@@ -8,7 +8,7 @@ const App = () => {
   return (
     pug`
       div
-        ${SongList}
+        SongList
     `
   )
 
